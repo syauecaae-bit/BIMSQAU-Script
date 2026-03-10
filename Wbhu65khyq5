@@ -1,10 +1,9 @@
 --[[
-    🌐 DUALITY HUB — Script Loader
-    Loader dengan GUI pure (tanpa library eksternal)
+    🌐 DUALITY HUB — Script Loader (Generated)
     by: Duality Team
+    Total scripts: 2
 ]]
 
--- ==================== GUI LOADER ====================
 local DualityLoader = Instance.new("ScreenGui")
 DualityLoader.Name = "DualityLoader"
 DualityLoader.ResetOnSpawn = false
@@ -21,13 +20,11 @@ MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Parent = DualityLoader
 
--- Shadow / Stroke
 local Stroke = Instance.new("UIStroke")
 Stroke.Color = Color3.fromRGB(80, 160, 255)
 Stroke.Thickness = 2
 Stroke.Parent = MainFrame
 
--- Rounded Corners
 local Corner = Instance.new("UICorner")
 Corner.CornerRadius = UDim.new(0, 8)
 Corner.Parent = MainFrame
@@ -100,12 +97,13 @@ local ContentCorner = Instance.new("UICorner")
 ContentCorner.CornerRadius = UDim.new(0, 6)
 ContentCorner.Parent = ContentFrame
 
+-- Script List dengan SCROLL
 local ScriptList = Instance.new("ScrollingFrame")
 ScriptList.Size = UDim2.new(1, -20, 1, -20)
 ScriptList.Position = UDim2.new(0, 10, 0, 10)
 ScriptList.BackgroundTransparency = 1
 ScriptList.BorderSizePixel = 0
-ScriptList.ScrollBarThickness = 4
+ScriptList.ScrollBarThickness = 6
 ScriptList.ScrollBarImageColor3 = Color3.fromRGB(80, 160, 255)
 ScriptList.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScriptList.AutomaticCanvasSize = Enum.AutomaticSize.Y
@@ -114,7 +112,7 @@ ScriptList.Parent = ContentFrame
 local ScriptListLayout = Instance.new("UIListLayout")
 ScriptListLayout.FillDirection = Enum.FillDirection.Vertical
 ScriptListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-ScriptListLayout.Padding = UDim.new(0, 6)
+ScriptListLayout.Padding = UDim.new(0, 8)
 ScriptListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 ScriptListLayout.Parent = ScriptList
 
@@ -143,28 +141,26 @@ StatusLabel.Parent = InfoBar
 
 -- ==================== DATA SCRIPTS ====================
 local scripts = {
-    {
-        name = "🔥 Simple Spells",
-        desc = "Script all-in-one untuk game Simple Spells dengan auto farm, ESP, dan fitur eksploit",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua"))()',
-        color = Color3.fromRGB(255, 100, 100),
-        icon = "🔮"
-    },
-    -- Tambahkan script lain di sini
-    -- Contoh:
-    -- {
-    --     name = "⚡ Script Lain",
-    --     desc = "Deskripsi script lain...",
-    --     loadstring = 'loadstring(game:HttpGet("URL_SCRIPT_LAIN"))()',
-    --     color = Color3.fromRGB(100, 200, 100),
-    --     icon = "⚡"
-    -- },
-}
+        {
+            name = "Sawah indo",
+            desc = "KAITUN",
+            loadstring = 'loadstring(game:HttpGet(\"https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Sawah%20indo.lua\"))()',
+            color = Color3.fromRGB(74, 108, 247),
+            icon = "🌾",
+        },
+        {
+            name = "🔥 Simple Spells",
+            desc = "Script all-in-one untuk game Simple Spells. Auto farm, ESP, silent aim, dll.",
+            loadstring = 'loadstring(game:HttpGet(\"https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua\"))()',
+            color = Color3.fromRGB(255, 100, 100),
+            icon = "🔥",
+        },
+    }
 
 -- ==================== FUNGSI UTIL ====================
 local function createScriptButton(scriptData, index)
     local btnFrame = Instance.new("Frame")
-    btnFrame.Size = UDim2.new(1, -10, 0, 70)
+    btnFrame.Size = UDim2.new(1, -10, 0, 80)
     btnFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
     btnFrame.BorderSizePixel = 0
     btnFrame.LayoutOrder = index
@@ -174,7 +170,6 @@ local function createScriptButton(scriptData, index)
     btnCorner.CornerRadius = UDim.new(0, 6)
     btnCorner.Parent = btnFrame
 
-    -- Hover effect
     btnFrame.MouseEnter:Connect(function()
         btnFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
     end)
@@ -182,7 +177,6 @@ local function createScriptButton(scriptData, index)
         btnFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
     end)
 
-    -- Icon
     local icon = Instance.new("TextLabel")
     icon.Size = UDim2.new(0, 40, 1, 0)
     icon.Position = UDim2.new(0, 5, 0, 0)
@@ -193,7 +187,6 @@ local function createScriptButton(scriptData, index)
     icon.TextSize = 24
     icon.Parent = btnFrame
 
-    -- Name
     local nameLabel = Instance.new("TextLabel")
     nameLabel.Size = UDim2.new(1, -90, 0, 25)
     nameLabel.Position = UDim2.new(0, 50, 0, 5)
@@ -205,9 +198,8 @@ local function createScriptButton(scriptData, index)
     nameLabel.TextXAlignment = Enum.TextXAlignment.Left
     nameLabel.Parent = btnFrame
 
-    -- Description
     local descLabel = Instance.new("TextLabel")
-    descLabel.Size = UDim2.new(1, -90, 0, 30)
+    descLabel.Size = UDim2.new(1, -90, 0, 35)
     descLabel.Position = UDim2.new(0, 50, 0, 25)
     descLabel.BackgroundTransparency = 1
     descLabel.Text = scriptData.desc
@@ -218,7 +210,6 @@ local function createScriptButton(scriptData, index)
     descLabel.TextWrapped = true
     descLabel.Parent = btnFrame
 
-    -- Run Button
     local runBtn = Instance.new("TextButton")
     runBtn.Size = UDim2.new(0, 30, 0, 30)
     runBtn.Position = UDim2.new(1, -40, 0.5, -15)
@@ -278,28 +269,23 @@ local function createTab(name, icon)
 end
 
 -- ==================== INITIALIZE ====================
--- Bersihkan ScriptList
 for _, child in ipairs(ScriptList:GetChildren()) do
     if child:IsA("Frame") then
         child:Destroy()
     end
 end
 
--- Buat tombol untuk setiap script
 for i, scriptData in ipairs(scripts) do
     createScriptButton(scriptData, i)
 end
 
--- Hitung total scripts dan update canvas
 task.wait()
 ScriptList.CanvasSize = UDim2.new(0, 0, 0, ScriptListLayout.AbsoluteContentSize.Y + 10)
 
--- Buat tab (default)
 local mainTab = createTab("Scripts", "📋")
 mainTab.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
 mainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 
--- Notifikasi awal
 StatusLabel.Text = "✅ Loader siap. Tersedia " .. #scripts .. " script."
 
 -- ==================== DRAG HANDLER ====================
