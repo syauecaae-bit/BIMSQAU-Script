@@ -3,68 +3,44 @@
     by: Duality Team
 ]]
 
--- =============================================================================
--- [UNIVERSE ID DETECTION]
--- =============================================================================
+-- Gunakan game.GameId karena itu adalah Universe ID yang asli
+local currentUniverseId = game.GameId
 
--- Daftar game berdasarkan Universe ID (SATU TABEL untuk semua game)
+-- Daftar game (Simpan URL-nya saja agar lebih rapi)
 local GAMES_BY_UNIVERSE = {
     [7896876615] = {
         name = "Doom By Fate",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/DoomByFate.lua"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/DoomByFate.lua",
     },
     [9691752199] = {
         name = "Sawah indo",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Sawah%20indo.lua"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Sawah%20indo.lua",
     },
     [9226697658] = {
         name = "shovel it",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Shovel%20it!.lua"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Shovel%20it!.lua",
     },
     [7628235825] = {
         name = "Simple Spells",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua",
     },
     [9753814298] = {
         name = "Swing obby for brainrot",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Swingforbrainrot"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Swingforbrainrot",
     },
     [9695620503] = {
         name = "reel a brainrot",
-        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/Reel%20a%20brainrot"))()',
+        url = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/Reel%20a%20brainrot",
     },
 }
 
--- =============================================================================
--- [FUNGSI GET UNIVERSE ID]
--- =============================================================================
+-- Deteksi dan Eksekusi
+local gameData = GAMES_BY_UNIVERSE[currentUniverseId]
 
-local function getUniverseId(placeId)
-    local success, result = pcall(function()
-        local url = "https://apis.roblox.com/universes/v1/places/" .. placeId .. "/universe"
-        return game:HttpGet(url)
-    end)
-    
-    if success and result then
-        local success2, data = pcall(function()
-            return game:GetService("HttpService"):JSONDecode(result)
-        end)
-        if success2 and data and data.universeId then
-            return data.universeId
-        end
-    end
-    return nil
-end
-
--- =============================================================================
--- [DETEKSI DAN LOAD]
--- =============================================================================
-
-local currentUniverseId = getUniverseId(game.PlaceId)
-
-if currentUniverseId and GAMES_BY_UNIVERSE[currentUniverseId] then
-    local gameData = GAMES_BY_UNIVERSE[currentUniverseId]
-    loadstring(gameData.loadstring)()
+if gameData then
+    print("Duality Hub: Memuat script untuk " .. gameData.name)
+    -- Eksekusi loadstring langsung ke URL
+    loadstring(game:HttpGet(gameData.url))()
 else
-    -- Game tidak terdeteksi, script tidak melakukan apa-apa
+    warn("Duality Hub: Game tidak terdaftar (Universe ID: " .. tostring(currentUniverseId) .. ")")
 end
