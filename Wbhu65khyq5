@@ -17,6 +17,10 @@ local GAMES_BY_UNIVERSE = {
         name = "Sawah indo",
         loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Sawah%20indo.lua"))()',
     },
+    [9226697658] = {
+        name = "shovel it",
+        loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Shovel%20it!.lua"))()',
+    },
     [7628235825] = {
         name = "Simple Spells",
         loadstring = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua"))()',
