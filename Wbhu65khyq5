@@ -1,10 +1,12 @@
 --[[
-    🌀 DUALITY HUB — Fixed Loader
+    🌀 DUALITY HUB — Auto Game Detection
+    Update: Added New Game (9663968307)
 ]]
 
-local currentUniverseId = game.GameId -- Universe ID asli Roblox
-print("Duality Hub: Mendeteksi Universe ID -> " .. tostring(currentUniverseId))
+local currentUniverseId = game.GameId
+print("Duality Hub: Mendeteksi Game ID -> " .. tostring(currentUniverseId))
 
+-- Daftar game berdasarkan Universe ID
 local GAMES_BY_UNIVERSE = {
     [7896876615] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/DoomByFate.lua",
     [9691752199] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Sawah%20indo.lua",
@@ -12,20 +14,22 @@ local GAMES_BY_UNIVERSE = {
     [7628235825] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Simple%20spells.lua",
     [9753814298] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Swingforbrainrot",
     [9695620503] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/Reel%20a%20brainrot",
+    
+    -- Game Baru yang kamu tambahkan
+    [9663968307] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/obfuscated_script-1773459812142.lua.txt",
 }
 
 local scriptUrl = GAMES_BY_UNIVERSE[currentUniverseId]
 
 if scriptUrl then
-    print("Game Terdeteksi! Memuat script...")
-    -- Gunakan pcall agar jika script error, loader tidak berhenti total
+    print("Duality Hub: Game Dikenali! Memuat Script...")
     local success, err = pcall(function()
         loadstring(game:HttpGet(scriptUrl))()
     end)
     
     if not success then
-        warn("Gagal memuat script: " .. tostring(err))
+        warn("Duality Hub Error: " .. tostring(err))
     end
 else
-    warn("Duality Hub: Game ini tidak terdaftar di database (ID: " .. tostring(currentUniverseId) .. ")")
+    warn("Duality Hub: Game tidak terdaftar (ID: " .. tostring(currentUniverseId) .. ")")
 end
