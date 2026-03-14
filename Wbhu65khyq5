@@ -1,6 +1,6 @@
 --[[
-    🌀 DUALITY HUB — Auto Game Detection
-    Update: Added New Game (9663968307)
+    🌀 DUALITY HUB — Auto Game Detection (Updated)
+    By: Duality Team
 ]]
 
 local currentUniverseId = game.GameId
@@ -15,8 +15,8 @@ local GAMES_BY_UNIVERSE = {
     [9753814298] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/Swingforbrainrot",
     [9695620503] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/Reel%20a%20brainrot",
     
-    -- Game Baru yang kamu tambahkan
-    [9663968307] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/obfuscated_script-1773459812142.lua.txt",
+    -- Update Link Baru untuk Game ID ini:
+    [9663968307] = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/main/obfuscated_script-1773475400490.lua.txt",
 }
 
 local scriptUrl = GAMES_BY_UNIVERSE[currentUniverseId]
@@ -28,8 +28,8 @@ if scriptUrl then
     end)
     
     if not success then
-        warn("Duality Hub Error: " .. tostring(err))
+        warn("Duality Hub Error (Script Gagal Dimuat): " .. tostring(err))
     end
 else
-    warn("Duality Hub: Game tidak terdaftar (ID: " .. tostring(currentUniverseId) .. ")")
+    warn("Duality Hub: Game ini belum terdaftar di database (ID: " .. tostring(currentUniverseId) .. ")")
 end
