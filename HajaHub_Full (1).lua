@@ -4,7 +4,7 @@
 -- AUTO RELOAD saat teleport ke game lain
 -- Simpan URL script di _G agar executor bisa re-run setelah teleport
 -- ─────────────────────────────────────────────
-local SCRIPT_URL = "https://raw.githubusercontent.com/namakamu/HajaHub/main/HajaHub.lua"
+local SCRIPT_URL = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/HajaHub_Full%20(1).lua"
 -- Ganti URL di atas dengan URL raw script kamu (pastebin/github)
 
 -- Executor-agnostic teleport hook
