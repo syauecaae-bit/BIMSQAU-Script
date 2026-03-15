@@ -1,30 +1,26 @@
 -- Haja Hub · Zombie Survival & RAIDS · v5
 
--- ─────────────────────────────────────────────
--- AUTO RELOAD saat teleport ke game lain
--- Simpan URL script di _G agar executor bisa re-run setelah teleport
--- ─────────────────────────────────────────────
+-- AUTO RELOAD saat teleport
 local SCRIPT_URL = "https://raw.githubusercontent.com/syauecaae-bit/BIMSQAU-Script/refs/heads/main/HajaHub_Full%20(1).lua"
--- Ganti URL di atas dengan URL raw script kamu (pastebin/github)
 
--- Executor-agnostic teleport hook
-local ok_env, genv = pcall(getgenv)
-if ok_env and genv then
-    genv.__HajaHubURL = SCRIPT_URL
-end
-
--- Hook OnTeleport untuk auto-run script di game baru
 pcall(function()
+    local cmd = ('loadstring(game:HttpGet("%s"))()'):format(SCRIPT_URL)
     game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(state)
-        if state == Enum.TeleportState.Started then
-            -- Coba metode executor yang umum
-            if syn and syn.run_on_teleport then
-                syn.run_on_teleport(("loadstring(game:HttpGet('%s'))()"):format(SCRIPT_URL))
-            elseif run_on_teleport then
-                run_on_teleport(("loadstring(game:HttpGet('%s'))()"):format(SCRIPT_URL))
-            elseif KRNL_LOADED and setfflag then
-                -- Krnl / Delta: simpan ke clipboard sebagai fallback
-            end
+        if state ~= Enum.TeleportState.Started then return end
+        if queue_on_teleport then             -- Delta, Fluxus, Wave, Arceus, Xeno
+            queue_on_teleport(cmd)
+        elseif syn and syn.queue_on_teleport then  -- Synapse X
+            syn.queue_on_teleport(cmd)
+        elseif XENO and XENO.queue_on_teleport then -- Xeno (fallback)
+            XENO.queue_on_teleport(cmd)
+        elseif run_on_teleport then           -- Krnl lama
+            run_on_teleport(cmd)
+        elseif KRNL_LOADED then              -- Krnl baru
+            pcall(queue_on_teleport, cmd)
+        elseif pebc_queue_on_teleport then   -- Electron
+            pebc_queue_on_teleport(cmd)
+        elseif elysian then                  -- Elysian
+            elysian.queue_on_teleport(cmd)
         end
     end)
 end)
